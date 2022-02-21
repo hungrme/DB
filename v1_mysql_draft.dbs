@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MySql" id="Project_bef" database="MySql" >
+	<schema name="hungrme_db" >
+		<table name="branch" row_count="0" >
+			<column name="branchId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="merchantId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="branchName" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="reservationPossible" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="deliveryService" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="takeAway" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="recommendedFor" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Further business information
+		reservation possible Yes delivery service No Take-Away No Recommended for Dinner Parking & Parking road Suitable for children Yes Suitable for groups Yes Dress code Casual ambiance Casual noise normal alcohol All alcoholics Outdoor seating Yes WIRELESS INTERNET ACCESS No Has TV No  ]]></comment>
+			</column>
+			<column name="parking" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="suitableForChildren" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="dressCode" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="ambiance" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="noise" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="outdoorSeating" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="wlanAvailable" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="hasTV" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="monOpenHour" type="time" length="8" decimal="0" jt="92" >
+				<comment><![CDATA[Mon.
+Closed
+
+Tue.
+18:00 - 00:00
+
+Wed.
+18:00 - 00:00
+
+Do.
+18:00 - 00:00
+
+Fr.
+18:00 - 00:00
+
+Sat.
+18:00 - 00:00
+Now closed
+So.
+Closed]]></comment>
+			</column>
+			<column name="monCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="tueOpenHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="tueCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="wedOpenHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="wedCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="thuOpenHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="thuCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="friOpenHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="friCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="satOpenHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="satCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="sunOpenHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="sunCloseHour" type="time" length="8" decimal="0" jt="92" />
+			<column name="hasBathroom" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="address" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="xCoordinate" type="decimal" length="15" decimal="0" jt="3" mandatory="y" />
+			<column name="yCoordinate" type="decimal" length="15" decimal="0" jt="3" mandatory="y" />
+			<column name="telephone" type="int" length="10" decimal="0" jt="4" />
+			<column name="secondaryTelephone" type="int" length="10" decimal="0" jt="4" />
+			<column name="zCoordinate" type="decimal" length="15" decimal="0" jt="3" />
+			<index name="pk_branch" unique="PRIMARY_KEY" >
+				<column name="branchId" />
+			</index>
+			<index name="merchantId2" unique="NORMAL" >
+				<column name="merchantId" />
+			</index>
+			<fk name="merchantId2" to_schema="hungrme_db" to_table="merchant" delete_action="restrict" update_action="restrict" >
+				<fk_column name="merchantId" pk="merchantId" />
+			</fk>
+		</table>
+		<table name="branch_servicesavailable" row_count="0" >
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="branch_id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="servicesavailable_id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<index name="pk_branch_servicesavailable" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="unq_branch_servicesavailable_branch_id" unique="UNIQUE" >
+				<column name="branch_id" />
+			</index>
+			<index name="unq_branch_servicesavailable_servicesavailable_id" unique="UNIQUE" >
+				<column name="servicesavailable_id" />
+			</index>
+		</table>
+		<table name="food" row_count="0" >
+			<column name="foodId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="branchId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foodName" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="foodPrice" type="decimal" length="5" decimal="2" jt="3" mandatory="y" />
+			<column name="cuisine" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="carbServing" type="varchar" length="45" decimal="0" jt="12" >
+				<comment><![CDATA[One serving of carbohydrate is measured as 15 grams. A food that contains 15 grams of carbohydrate is called “one carb serving”. For example, one slice of bread, a small piece of fruit, or a ear of corn each have around 15 grams of carb. Each of these equals one carb serving.]]></comment>
+			</column>
+			<column name="calories" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="cerealsWithGluten" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Cereals containing gluten 
+Wheat (such as spelt and Khorasan wheat/Kamut), rye, barley and oats is often found in foods containing flour, such as some types of baking powder, batter, breadcrumbs, bread, cakes, couscous, meat products, pasta, pastry, sauces, soups and fried foods which are dusted with flour.
+
+Cereals containing gluten, namely: wheat (such as spelt and khorasan wheat), rye, barley, oats or their hybridised strains, and products thereof, except:
+
+(a) wheat based glucose syrups including dextrose
+(b) wheat based maltodextrins
+(c) glucose syrups based on barley
+(d) cereals used for making alcoholic distillates including ethyl alcohol of agricultural origin]]></comment>
+			</column>
+			<column name="crustaceans" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Crustaceans 
+Crabs, lobster, prawns and scampi are crustaceans. Shrimp paste, often used in Thai and south-east Asian curries or salads, is an ingredient to look out for.]]></comment>
+			</column>
+			<column name="eggs" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Eggs 
+Eggs are often found in cakes, some meat products, mayonnaise, mousses, pasta, quiche, sauces and pastries or foods brushed or glazed with egg.]]></comment>
+			</column>
+			<column name="fish" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Fish 
+You will find this in some fish sauces, pizzas, relishes, salad dressings, stock cubes and Worcestershire sauce.
+
+Fish and products thereof, except:
+
+(a) fish gelatine used as carrier for vitamin or carotenoid preparations
+(b) fish gelatine or Isinglass used as fining agent in beer and wine]]></comment>
+			</column>
+			<column name="peanuts" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Peanuts 
+Peanuts are actually a legume and grow underground, which is why it’s sometimes called a groundnut. Peanuts are often used as an ingredient in biscuits, cakes, curries, desserts, sauces (such as satay sauce), as well as in groundnut oil and peanut flour.]]></comment>
+			</column>
+			<column name="soybeans" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Soya 
+Often found in bean curd, edamame beans, miso paste, textured soya protein, soya flour or tofu, soya is a staple ingredient in oriental food. It can also be found in desserts, ice cream, meat products, sauces and vegetarian products.
+
+Soybeans and products thereof, except:
+
+(a) fully refined soybean oil and fat
+(b) natural mixed tocopherols (E306), natural D-alpha tocopherol, natural D-alpha tocopherol acetate, and natural D-alpha tocopherol succinate from soybean sources
+(c) vegetable oils derived phytosterols and phytosterol esters from soybean sources
+(d) plant stanol ester produced from vegetable oil sterols from soybean sources]]></comment>
+			</column>
+			<column name="milk" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Milk 
+Milk is a common ingredient in butter, cheese, cream, milk powders and yoghurt. It can also be found in foods brushed or glazed with milk, and in powdered soups and sauces.
+
+Milk and products thereof (including lactose), except:
+
+(a) whey used for making alcoholic distillates including ethyl alcohol of agricultural origin
+(b) lactitol]]></comment>
+			</column>
+			<column name="celery" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Celery 
+This includes celery stalks, leaves, seeds and the root called celeriac. You can find celery in celery salt, salads, some meat products, soups and stock cubes.]]></comment>
+			</column>
+			<column name="mustard" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Mustard 
+Liquid mustard, mustard powder and mustard seeds fall into this category. This ingredient can also be found in breads, curries, marinades, meat products, salad dressings, sauces and soups.]]></comment>
+			</column>
+			<column name="sesameSeeds" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Sesame seeds 
+These seeds can often be found in bread (sprinkled on hamburger buns for example), breadsticks, houmous, sesame oil and tahini. They are sometimes toasted and used in salads.]]></comment>
+			</column>
+			<column name="sulphurDioxideandSulphites" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Sulphur dioxide 
+(sometimes known as sulphites) This is an ingredient often used in dried fruit such as raisins, dried apricots and prunes. You might also find it in meat products, soft drinks, vegetables as well as in wine and beer. If you have asthma, you have a higher risk of developing a reaction to sulphur dioxide.
+
+Sulphur dioxide and sulphites at concentrations of more than 10 mg/kg or 10 mg/litre in terms of the total SO2 which are to be calculated for products as proposed ready for consumption or as reconstituted according to the instructions of the manufacturers]]></comment>
+			</column>
+			<column name="lupin" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Lupin 
+Yes, lupin is a flower, but it’s also found in flour! Lupin flour and seeds can be used in some types of bread, pastries and even in pasta.]]></comment>
+			</column>
+			<column name="molluscs" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Molluscs 
+These include mussels, land snails, squid and whelks, but can also be commonly found in oyster sauce or as an ingredient in fish stews]]></comment>
+			</column>
+			<column name="nuts" type="tinyint" length="3" decimal="0" jt="-6" >
+				<comment><![CDATA[Nuts 
+Not to be mistaken with peanuts (which are actually a legume and grow underground), this ingredient refers to nuts which grow on trees, like cashew nuts, almonds and hazelnuts. You can find nuts in breads, biscuits, crackers, desserts, nut powders (often used in Asian curries), stir-fried dishes, ice cream, marzipan (almond paste), nut oils and sauces
+
+ Nuts, namely: almonds (Amygdalus communis L.), hazelnuts (Corylus avellana), walnuts (Juglans regia), cashews (Anacardium occidentale), pecan nuts (Carya illinoinensis(Wangenh.) K. Koch), Brazil nuts (Bertholletia excelsa), pistachio nuts (Pistacia vera), macadamia or Queensland nuts (Macadamia ternifolia), and products thereof, except for nuts used for making alcoholic distillates including ethyl alcohol of agricultural origin]]></comment>
+			</column>
+			<column name="halalCertified" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="vegan" type="tinyint" length="3" decimal="0" jt="-6" />
+			<index name="pk_food" unique="PRIMARY_KEY" >
+				<column name="foodId" />
+			</index>
+			<index name="branchId_idx" unique="NORMAL" >
+				<column name="branchId" />
+			</index>
+			<fk name="branchId1" to_schema="hungrme_db" to_table="branch" delete_action="restrict" update_action="restrict" >
+				<fk_column name="branchId" pk="branchId" />
+			</fk>
+		</table>
+		<table name="foodtag" row_count="0" >
+			<column name="foodTagId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="foodId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="tagId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_foodtag" unique="PRIMARY_KEY" >
+				<column name="foodTagId" />
+			</index>
+			<index name="foodId_idx" unique="NORMAL" >
+				<column name="foodId" />
+			</index>
+			<index name="tagId_idx" unique="NORMAL" >
+				<column name="tagId" />
+			</index>
+			<fk name="foodId1" to_schema="hungrme_db" to_table="food" delete_action="restrict" update_action="restrict" >
+				<fk_column name="foodId" pk="foodId" />
+			</fk>
+			<fk name="tagId0" to_schema="hungrme_db" to_table="tags" delete_action="restrict" update_action="restrict" >
+				<fk_column name="tagId" pk="tagId" />
+			</fk>
+		</table>
+		<table name="member" row_count="0" >
+			<column name="memberId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="accountType" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="timeCreated" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<column name="username" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="password" type="varchar" length="100" decimal="0" jt="12" />
+			<column name="email_address" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="role_id" type="bigint" length="19" decimal="0" jt="-5" >
+				<defo>1</defo>
+			</column>
+			<index name="pk_member" unique="PRIMARY_KEY" >
+				<column name="memberId" />
+			</index>
+			<fk name="Fk_member_role" to_schema="hungrme_db" to_table="role" >
+				<fk_column name="role_id" pk="id" />
+			</fk>
+		</table>
+		<table name="membership" row_count="0" >
+			<column name="membershipId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="membershipType" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="renewTime" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
+			<column name="createdTime" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<column name="hungrmecardNumber" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="merchantId" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_membership" unique="PRIMARY_KEY" >
+				<column name="membershipId" />
+			</index>
+			<index name="merchantId_idx" unique="NORMAL" >
+				<column name="merchantId" />
+			</index>
+			<fk name="merchantId3" to_schema="hungrme_db" to_table="merchant" delete_action="restrict" update_action="restrict" >
+				<fk_column name="merchantId" pk="merchantId" />
+			</fk>
+		</table>
+		<table name="merchant" row_count="0" >
+			<column name="merchantId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="displayMerchantID" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="memberId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="businessName" type="varchar" length="45" decimal="0" jt="12" mandatory="y" />
+			<column name="businessOwner" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="membershipId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_merchant" unique="PRIMARY_KEY" >
+				<column name="merchantId" />
+			</index>
+			<index name="memberId_idx" unique="NORMAL" >
+				<column name="memberId" />
+			</index>
+			<fk name="memberId1" to_schema="hungrme_db" to_table="member" delete_action="restrict" update_action="restrict" >
+				<fk_column name="memberId" pk="memberId" />
+			</fk>
+		</table>
+		<table name="permission" row_count="0" >
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="name" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="100" decimal="0" jt="12" />
+			<column name="active" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="createdAt" type="date" length="10" decimal="0" jt="91" />
+			<column name="updatedAt" type="date" length="10" decimal="0" jt="91" />
+			<index name="pk_permission" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="role" row_count="1" >
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="100" decimal="0" jt="12" />
+			<column name="active" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="createdAt" type="date" length="10" decimal="0" jt="91" />
+			<column name="updatedAt" type="date" length="10" decimal="0" jt="91" />
+			<index name="pk_role" unique="PRIMARY_KEY" >
+				<column name="id" />
+				<column name="name" />
+			</index>
+			<index name="unq_role_id" unique="UNIQUE" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="role_permission" row_count="0" >
+			<column name="roleId" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="permissionId" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="createdAt" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="updatedAt" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<index name="fk_role_permission_permission_0" unique="NORMAL" >
+				<column name="permissionId" />
+			</index>
+			<index name="fk_role_permission_role_0" unique="NORMAL" >
+				<column name="roleId" />
+			</index>
+			<fk name="fk_role_permission_permission_0" to_schema="hungrme_db" to_table="permission" delete_action="restrict" update_action="restrict" >
+				<fk_column name="permissionId" pk="id" />
+			</fk>
+			<fk name="fk_role_permission_role_0" to_schema="hungrme_db" to_table="role" delete_action="restrict" update_action="restrict" >
+				<fk_column name="roleId" pk="id" />
+			</fk>
+		</table>
+		<table name="servicesavailable" row_count="0" >
+			<column name="id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" autoincrement="y" />
+			<column name="name" type="varchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="desc" type="varchar" length="100" decimal="0" jt="12" />
+			<column name="data" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="last_updated" type="date" length="10" decimal="0" jt="91" />
+			<column name=" yesno" type="boolean" length="1" decimal="0" jt="-7" />
+			<index name="pk_servicesavailable" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_servicesavailable_branch_servicesavailable" to_schema="hungrme_db" to_table="branch_servicesavailable" delete_action="cascade" update_action="restrict" >
+				<fk_column name="id" pk="servicesavailable_id" />
+			</fk>
+		</table>
+		<table name="tags" row_count="0" >
+			<column name="tagId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="tagName" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="timeCreated" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_tags" unique="PRIMARY_KEY" >
+				<column name="tagId" />
+			</index>
+		</table>
+		<table name="user" row_count="4" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="first_name" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="last_name" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="country" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="dateOfBirth" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="gender" type="varchar" length="45" decimal="0" jt="12" />
+			<column name="memberId" type="int" length="10" decimal="0" jt="4" />
+			<column name="temp_token" type="varchar" length="200" decimal="0" jt="12" />
+			<index name="pk_user" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="memberId_idx" unique="NORMAL" >
+				<column name="memberId" />
+			</index>
+			<fk name="memberId0" to_schema="hungrme_db" to_table="member" delete_action="restrict" update_action="restrict" >
+				<fk_column name="memberId" pk="memberId" />
+			</fk>
+		</table>
+		<table name="userbranchrating" row_count="0" >
+			<column name="userBranchRatingId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="branchId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="bathroomQuality" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="staff" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="cleanliness" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="serviceSpeed" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="foodQuality" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="price" type="tinyint" length="3" decimal="0" jt="-6" />
+			<index name="pk_userbranchrating" unique="PRIMARY_KEY" >
+				<column name="userBranchRatingId" />
+			</index>
+			<index name="branchId_idx" unique="NORMAL" >
+				<column name="branchId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="branchId0" to_schema="hungrme_db" to_table="branch" delete_action="restrict" update_action="restrict" >
+				<fk_column name="branchId" pk="branchId" />
+			</fk>
+			<fk name="userId" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userbranchreview" row_count="0" >
+			<column name="userBranchReviewId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="branchId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="branchReview" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="upvoteCount" type="int" length="10" decimal="0" jt="4" />
+			<column name="downvoteCount" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_userbranchreview" unique="PRIMARY_KEY" >
+				<column name="userBranchReviewId" />
+			</index>
+			<index name="branchId_idx" unique="NORMAL" >
+				<column name="branchId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="branchId2" to_schema="hungrme_db" to_table="branch" delete_action="restrict" update_action="restrict" >
+				<fk_column name="branchId" pk="branchId" />
+			</fk>
+			<fk name="userId4" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userbranchsubscription" row_count="0" >
+			<column name="userBranchSubscriptionId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="branchId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userBranchSubscription" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="createdTime" type="timestamp" length="19" decimal="0" jt="93" mandatory="y" >
+				<defo>CURRENT_TIMESTAMP</defo>
+			</column>
+			<index name="pk_userbranchsubscription" unique="PRIMARY_KEY" >
+				<column name="userBranchSubscriptionId" />
+			</index>
+			<index name="branchId_idx" unique="NORMAL" >
+				<column name="branchId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="branchId4" to_schema="hungrme_db" to_table="branch" delete_action="restrict" update_action="restrict" >
+				<fk_column name="branchId" pk="branchId" />
+			</fk>
+			<fk name="userId8" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userbranchvote" row_count="0" >
+			<column name="userBranchVoteId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="branchId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userBranchVoteValue" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<index name="pk_userbranchvote" unique="PRIMARY_KEY" >
+				<column name="userBranchVoteId" />
+			</index>
+			<index name="branchId_idx" unique="NORMAL" >
+				<column name="branchId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="branchId3" to_schema="hungrme_db" to_table="branch" delete_action="restrict" update_action="restrict" >
+				<fk_column name="branchId" pk="branchId" />
+			</fk>
+			<fk name="userId6" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userfoodrating" row_count="0" >
+			<column name="userFoodRatingId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foodId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="presentation" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="taste" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="freshness" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="cleanliness" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<column name="experience" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" >
+				<comment><![CDATA[Ratings
+Some publications issue starred ratings along with the reviews, while others let the writing stand for itself. AFJ does not take a position on the validity of ratings. Should you use ratings, here are some suggestions for how to think about imposing them:
+Ratings should reflect a reviewer’s reaction to menu, atmosphere, service and value, and should be determined with regard to what the restaurant is trying to accomplish: An Indian restaurant shouldn’t be downgraded because it doesn’t serve filet mignon, for example. A star system should not serve as a hierarchy of elegance.
+Have a sense of what a star or other rating symbol mean. Although you should develop a rating system appropriate for your readership, here are some definitions to consider:
+FOUR STARS (Extraordinary) Transcendent. A one-of-a-kind experience that sets the local standard.
+THREE STARS (Excellent) Superior. Memorable, high-quality food; exciting environs; savvy service; smart concept.
+TWO STARS (Good) Solid example of rest]]></comment>
+			</column>
+			<index name="pk_userfoodrating" unique="PRIMARY_KEY" >
+				<column name="userFoodRatingId" />
+			</index>
+			<index name="foodId_idx" unique="NORMAL" >
+				<column name="foodId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="foodId0" to_schema="hungrme_db" to_table="food" delete_action="restrict" update_action="restrict" >
+				<fk_column name="foodId" pk="foodId" />
+			</fk>
+			<fk name="userId0" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userfoodreview" row_count="0" >
+			<column name="userFoodReviewId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foodId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foodReview" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="upvoteCount" type="int" length="10" decimal="0" jt="4" />
+			<column name="downvoteCount" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_userfoodreview" unique="PRIMARY_KEY" >
+				<column name="userFoodReviewId" />
+			</index>
+			<index name="foodId_idx" unique="NORMAL" >
+				<column name="foodId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="foodId2" to_schema="hungrme_db" to_table="food" delete_action="restrict" update_action="restrict" >
+				<fk_column name="foodId" pk="foodId" />
+			</fk>
+			<fk name="fk_userfoodreview_user" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userfoodreviewvote" row_count="0" >
+			<column name="userFoodReviewVoteId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userFoodReviewId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userFoodReviewVoteValue" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<index name="pk_userfoodreviewvote" unique="PRIMARY_KEY" >
+				<column name="userFoodReviewVoteId" />
+			</index>
+			<index name="userFoodReview_idx" unique="NORMAL" >
+				<column name="userFoodReviewId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="userId7" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+			<fk name="userFoodReview" to_schema="hungrme_db" to_table="userfoodreview" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userFoodReviewId" pk="userFoodReviewId" />
+			</fk>
+		</table>
+		<table name="userfoodvote" row_count="0" >
+			<column name="userFoodVoteId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="foodId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userFoodVoteValue" type="tinyint" length="3" decimal="0" jt="-6" mandatory="y" />
+			<index name="pk_userfoodvote" unique="PRIMARY_KEY" >
+				<column name="userFoodVoteId" />
+			</index>
+			<index name="foodId_idx" unique="NORMAL" >
+				<column name="foodId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="foodId3" to_schema="hungrme_db" to_table="food" delete_action="restrict" update_action="restrict" >
+				<fk_column name="foodId" pk="foodId" />
+			</fk>
+			<fk name="userId5" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userpoints" row_count="0" >
+			<column name="userPointsId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="pointsValue" type="int" length="10" decimal="0" jt="4" />
+			<column name="pointsUsageCount" type="int" length="10" decimal="0" jt="4" />
+			<column name="usedPoints" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_userpoints" unique="PRIMARY_KEY" >
+				<column name="userPointsId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="userId2" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+		<table name="userreputation" row_count="0" >
+			<column name="userReputationId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="userId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="upCount" type="int" length="10" decimal="0" jt="4" />
+			<column name="downCount" type="int" length="10" decimal="0" jt="4" />
+			<column name="reputationValue" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_userreputation" unique="PRIMARY_KEY" >
+				<column name="userReputationId" />
+			</index>
+			<index name="userId_idx" unique="NORMAL" >
+				<column name="userId" />
+			</index>
+			<fk name="userId1" to_schema="hungrme_db" to_table="user" delete_action="restrict" update_action="restrict" >
+				<fk_column name="userId" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="MySql" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-8.0.19.jar" driver_desc="Standard" host="104.248.77.226" port="3306" instance="hungrme_db" user="admin_" passwd="SHVuZ3JtZTk5Iw==" />
+	<layout name="Default Layout" id="Layout_a83" show_relation="columns" >
+		<entity schema="hungrme_db" name="branch" color="D1BEF4" x="560" y="880" />
+		<entity schema="hungrme_db" name="branch_servicesavailable" color="C7F4BE" x="1328" y="1360" />
+		<entity schema="hungrme_db" name="food" color="F4DDBE" x="1440" y="80" />
+		<entity schema="hungrme_db" name="foodtag" color="F4DDBE" x="1728" y="400" />
+		<entity schema="hungrme_db" name="member" color="BEBEF4" x="320" y="880" />
+		<entity schema="hungrme_db" name="membership" color="BEBEF4" x="64" y="1120" />
+		<entity schema="hungrme_db" name="merchant" color="BEBEF4" x="80" y="880" />
+		<entity schema="hungrme_db" name="permission" color="BED3F4" x="272" y="592" />
+		<entity schema="hungrme_db" name="role" color="BED3F4" x="48" y="480" />
+		<entity schema="hungrme_db" name="role_permission" color="BED3F4" x="256" y="432" />
+		<entity schema="hungrme_db" name="servicesavailable" color="C7F4BE" x="1120" y="1360" />
+		<entity schema="hungrme_db" name="tags" color="F4DDBE" x="1920" y="400" />
+		<entity schema="hungrme_db" name="user" color="BED3F4" x="800" y="320" />
+		<entity schema="hungrme_db" name="userbranchrating" color="D1BEF4" x="816" y="880" />
+		<entity schema="hungrme_db" name="userbranchreview" color="BED3F4" x="768" y="592" />
+		<entity schema="hungrme_db" name="userbranchsubscription" color="D1BEF4" x="816" y="1376" />
+		<entity schema="hungrme_db" name="userbranchvote" color="BED3F4" x="1008" y="592" />
+		<entity schema="hungrme_db" name="userfoodrating" color="F4DDBE" x="1728" y="592" />
+		<entity schema="hungrme_db" name="userfoodreview" color="F4DDBE" x="1728" y="80" />
+		<entity schema="hungrme_db" name="userfoodreviewvote" color="F4DDBE" x="1968" y="80" />
+		<entity schema="hungrme_db" name="userfoodvote" color="F4DDBE" x="1440" y="592" />
+		<entity schema="hungrme_db" name="userpoints" color="BED3F4" x="560" y="96" />
+		<entity schema="hungrme_db" name="userreputation" color="BED3F4" x="576" y="368" />
+		<group name="servicesavailable" color="EEF7EC" >
+			<entity schema="hungrme_db" name="servicesavailable" />
+			<entity schema="hungrme_db" name="branch_servicesavailable" />
+		</group>
+		<group name="merchant" color="ECECF7" >
+			<entity schema="hungrme_db" name="merchant" />
+			<entity schema="hungrme_db" name="member" />
+			<entity schema="hungrme_db" name="membership" />
+		</group>
+		<group name="branch" color="F0ECF7" >
+			<entity schema="hungrme_db" name="branch" />
+			<entity schema="hungrme_db" name="userbranchrating" />
+			<entity schema="hungrme_db" name="userbranchsubscription" />
+		</group>
+		<group name="food" color="F7F2EC" >
+			<entity schema="hungrme_db" name="food" />
+			<entity schema="hungrme_db" name="userfoodreview" />
+			<entity schema="hungrme_db" name="foodtag" />
+			<entity schema="hungrme_db" name="userfoodrating" />
+			<entity schema="hungrme_db" name="userfoodvote" />
+			<entity schema="hungrme_db" name="userfoodreviewvote" />
+			<entity schema="hungrme_db" name="tags" />
+		</group>
+		<group name="user" color="ECF0F7" >
+			<entity schema="hungrme_db" name="user" />
+			<entity schema="hungrme_db" name="role_permission" />
+			<entity schema="hungrme_db" name="role" />
+			<entity schema="hungrme_db" name="userbranchvote" />
+			<entity schema="hungrme_db" name="userbranchreview" />
+			<entity schema="hungrme_db" name="permission" />
+			<entity schema="hungrme_db" name="userreputation" />
+			<entity schema="hungrme_db" name="userpoints" />
+		</group>
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_183e" show_column_type="y" show_relation="columns" >
+		<entity schema="hungrme_db" name="branch" color="D1BEF4" x="1120" y="1008" />
+		<entity schema="hungrme_db" name="branch_servicesavailable" color="C7F4BE" x="1952" y="1008" />
+		<entity schema="hungrme_db" name="food" color="F4DDBE" x="1120" y="80" />
+		<entity schema="hungrme_db" name="foodtag" color="F4DDBE" x="1440" y="400" />
+		<entity schema="hungrme_db" name="member" color="BEBEF4" x="336" y="1008" />
+		<entity schema="hungrme_db" name="membership" color="BEBEF4" x="336" y="1248" />
+		<entity schema="hungrme_db" name="merchant" color="BEBEF4" x="48" y="1008" />
+		<entity schema="hungrme_db" name="permission" color="BED3F4" x="304" y="80" />
+		<entity schema="hungrme_db" name="role" color="BED3F4" x="816" y="320" />
+		<entity schema="hungrme_db" name="role_permission" color="BED3F4" x="576" y="320" />
+		<entity schema="hungrme_db" name="servicesavailable" color="C7F4BE" x="1728" y="1008" />
+		<entity schema="hungrme_db" name="tags" color="F4DDBE" x="1648" y="400" />
+		<entity schema="hungrme_db" name="user" color="BED3F4" x="304" y="320" />
+		<entity schema="hungrme_db" name="userbranchrating" color="D1BEF4" x="1392" y="1008" />
+		<entity schema="hungrme_db" name="userbranchreview" color="BED3F4" x="288" y="720" />
+		<entity schema="hungrme_db" name="userbranchsubscription" color="D1BEF4" x="1392" y="1504" />
+		<entity schema="hungrme_db" name="userbranchvote" color="BED3F4" x="576" y="720" />
+		<entity schema="hungrme_db" name="userfoodrating" color="F4DDBE" x="1440" y="592" />
+		<entity schema="hungrme_db" name="userfoodreview" color="F4DDBE" x="1440" y="80" />
+		<entity schema="hungrme_db" name="userfoodreviewvote" color="F4DDBE" x="1712" y="80" />
+		<entity schema="hungrme_db" name="userfoodvote" color="F4DDBE" x="1120" y="592" />
+		<entity schema="hungrme_db" name="userpoints" color="BED3F4" x="48" y="96" />
+		<entity schema="hungrme_db" name="userreputation" color="BED3F4" x="64" y="496" />
+		<callout x="304" y="208" pointer="Round" >
+			<comment><![CDATA[This is a sample layout with tools. 
+For better understanding the schema create multiple layouts with same or different tables. 
+Double-click on any table, column or foreign key to edit.]]></comment>
+		</callout>
+		<group name="servicesavailable" color="EEF7EC" >
+			<entity schema="hungrme_db" name="servicesavailable" />
+			<entity schema="hungrme_db" name="branch_servicesavailable" />
+		</group>
+		<group name="merchant" color="ECECF7" >
+			<entity schema="hungrme_db" name="merchant" />
+			<entity schema="hungrme_db" name="member" />
+			<entity schema="hungrme_db" name="membership" />
+		</group>
+		<group name="branch" color="F0ECF7" >
+			<entity schema="hungrme_db" name="branch" />
+			<entity schema="hungrme_db" name="userbranchrating" />
+			<entity schema="hungrme_db" name="userbranchsubscription" />
+		</group>
+		<group name="food" color="F7F2EC" >
+			<entity schema="hungrme_db" name="food" />
+			<entity schema="hungrme_db" name="userfoodreview" />
+			<entity schema="hungrme_db" name="foodtag" />
+			<entity schema="hungrme_db" name="userfoodrating" />
+			<entity schema="hungrme_db" name="userfoodvote" />
+			<entity schema="hungrme_db" name="userfoodreviewvote" />
+			<entity schema="hungrme_db" name="tags" />
+		</group>
+		<group name="user" color="ECF0F7" >
+			<entity schema="hungrme_db" name="user" />
+			<entity schema="hungrme_db" name="role_permission" />
+			<entity schema="hungrme_db" name="role" />
+			<entity schema="hungrme_db" name="userbranchvote" />
+			<entity schema="hungrme_db" name="userbranchreview" />
+			<entity schema="hungrme_db" name="permission" />
+			<entity schema="hungrme_db" name="userreputation" />
+			<entity schema="hungrme_db" name="userpoints" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_59c" language="SQL" >
+			<string><![CDATA[SELECT id, first_name, last_name, country, xCoordinate, yCoordinate, zCoordinate, dateOfBirth, gender, memberId, role_id, 
+	email_address, username, password, temp_token, role_
+FROM
+	hungrme_db.`user` r;]]></string>
+		</script>
+		<browser id="Browse_1046" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="hungrme_db" entity="user" x="20" y="20" width="400" height="300" >
+				<browse_table schema="hungrme_db" entity="userfoodreview" fk="fk_userfoodreview_user" x="440" y="20" width="500" height="350" >
+					<browse_table schema="hungrme_db" entity="food" fk="foodId2" x="960" y="20" width="500" height="350" record_view="y" />
+				</browse_table>
+			</browse_table>
+		</browser>
+		<query id="Query_13a1" name="Sample Query Builder" >
+			<query_table schema="hungrme_db" name="user" alias="u" x="48" y="48" >
+				<column name="id" />
+				<column name="first_name" />
+				<column name="last_name" />
+				<column name="country" />
+				<column name="dateOfBirth" />
+				<column name="gender" />
+				<column name="memberId" />
+				<column name="temp_token" />
+				<query_table schema="hungrme_db" name="userfoodreview" alias="u1" x="224" y="48" fk="fk_userfoodreview_user" type="Inner Join" >
+					<column name="userFoodReviewId" />
+					<column name="userId" />
+					<column name="foodId" />
+					<column name="foodReview" />
+					<column name="upvoteCount" />
+					<column name="downvoteCount" />
+					<query_table schema="hungrme_db" name="food" alias="f" x="448" y="48" fk="foodId2" type="Inner Join" >
+						<column name="foodId" />
+						<column name="branchId" />
+						<column name="foodName" />
+						<column name="foodPrice" />
+						<column name="cuisine" />
+						<column name="carbServing" />
+						<column name="calories" />
+						<column name="cerealsWithGluten" />
+						<column name="crustaceans" />
+						<column name="eggs" />
+						<column name="fish" />
+						<column name="peanuts" />
+						<column name="soybeans" />
+						<column name="milk" />
+						<column name="celery" />
+						<column name="mustard" />
+						<column name="sesameSeeds" />
+						<column name="sulphurDioxideandSulphites" />
+						<column name="lupin" />
+						<column name="molluscs" />
+						<column name="nuts" />
+						<column name="halalCertified" />
+						<column name="vegan" />
+					</query_table>
+				</query_table>
+			</query_table>
+		</query>
+	</layout>
+</project>
