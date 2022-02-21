@@ -3,21 +3,99 @@
 	<schema name="public" >
 		<table name="members" >
 			<column name="member_id" type="bigint" length="19" decimal="0" jt="-5" mandatory="y" />
+			<column name="account_type" type="smallint" jt="5" />
+			<column name="created_at" type="timestamp" jt="93" >
+				<defo>current_timestamp</defo>
+			</column>
+			<column name="username" type="varchar" length="100" jt="12" />
+			<column name="password_id" type="bigint" jt="-5" />
+			<column name="email_address" type="varchar" length="200" jt="12" />
+			<column name="role_id" type="bigint" jt="-5" />
 			<index name="pk_members_member_id" unique="PRIMARY_KEY" >
 				<column name="member_id" />
 			</index>
+			<index name="unq_members_role_id" unique="UNIQUE" >
+				<column name="role_id" />
+			</index>
+			<fk name="fk_members_users" to_schema="public" to_table="users" >
+				<fk_column name="member_id" pk="member_id" />
+			</fk>
+			<fk name="fk_members_merchant" to_schema="public" to_table="merchant" >
+				<fk_column name="member_id" pk="merchant_id" />
+			</fk>
+		</table>
+		<table name="merchant" >
+			<column name="merchant_id" type="bigint" jt="-5" mandatory="y" />
+			<column name="member_id" type="bigint" length="50" jt="-5" />
+			<column name="display_merchant_id" type="varchar" length="50" jt="12" />
+			<column name="business_name" type="varchar" length="100" jt="12" />
+			<column name="business_owner" type="varchar" length="100" jt="12" />
+			<column name="membership_id" type="bigint" jt="-5" />
+			<index name="pk_merchant_merchant_id" unique="PRIMARY_KEY" >
+				<column name="merchant_id" />
+			</index>
+		</table>
+		<table name="permission" >
+			<column name="permission_id" type="bigint" jt="-5" />
+			<column name="name" type="varchar" length="100" jt="12" />
+			<column name="description" type="varchar" length="100" jt="12" />
+			<column name="active" type="boolean" jt="-7" />
+			<column name="created_at" type="timestamp" jt="93" />
+			<column name="updated_at" type="timestamp" jt="93" />
+			<index name="unq_permission_permission_id" unique="UNIQUE" >
+				<column name="permission_id" />
+			</index>
+		</table>
+		<table name="role" >
+			<column name="role_id" type="bigint" jt="-5" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" />
+			<column name="description" type="varchar" jt="12" />
+			<column name="active" type="varchar" jt="12" />
+			<column name="created_at" type="timestamp" jt="93" />
+			<column name="updated_at" type="date" jt="91" />
+			<index name="pk_tbl_role_id" unique="PRIMARY_KEY" >
+				<column name="role_id" />
+			</index>
+		</table>
+		<table name="role_permission" >
+			<column name="role_id" type="bigint" jt="-5" />
+			<column name="permission_id" type="bigint" jt="-5" />
+			<column name="created_at" type="bigint" jt="-5" />
+			<fk name="fk_role_permission_role" to_schema="public" to_table="role" >
+				<fk_column name="role_id" pk="role_id" />
+			</fk>
+			<fk name="fk_role_permission_permission" to_schema="public" to_table="permission" >
+				<fk_column name="permission_id" pk="permission_id" />
+			</fk>
+			<fk name="fk_role_permission_members" to_schema="public" to_table="members" >
+				<fk_column name="role_id" pk="role_id" />
+			</fk>
 		</table>
 		<table name="users" >
 			<column name="user_id" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="first_name" type="varchar" length="100" jt="12" />
+			<column name="last_name" type="varchar" length="100" jt="12" />
+			<column name="country" type="varchar" length="50" jt="12" />
+			<column name="date_of_birth" type="date" jt="91" />
+			<column name="gender" type="varchar" length="10" jt="12" />
+			<column name="member_id" type="bigint" jt="-5" />
+			<column name="temp_token" type="varchar" length="200" jt="12" />
 			<index name="pk_users_user_id" unique="PRIMARY_KEY" >
 				<column name="user_id" />
+			</index>
+			<index name="unq_users_member_id" unique="UNIQUE" >
+				<column name="member_id" />
 			</index>
 		</table>
 	</schema>
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.14.jar" driver_desc="Standard" host="104.248.77.226" port="5432" instance="hungrme" user="admin_db" passwd="aHVuZ3JtZWRiMjAyMg==" />
 	<layout name="Default Layout" id="Layout_74a" show_relation="columns" >
-		<entity schema="public" name="members" color="BED3F4" x="48" y="48" />
-		<entity schema="public" name="users" color="BED3F4" x="176" y="48" />
+		<entity schema="public" name="members" color="BED3F4" x="352" y="48" />
+		<entity schema="public" name="merchant" color="C1D8EE" x="656" y="48" />
+		<entity schema="public" name="permission" color="C1D8EE" x="672" y="416" />
+		<entity schema="public" name="role" color="C1D8EE" x="176" y="416" />
+		<entity schema="public" name="role_permission" color="C1D8EE" x="384" y="432" />
+		<entity schema="public" name="users" color="BED3F4" x="48" y="48" />
 	</layout>
 	<layout name="Sample Layout with Tools" id="Layout_1f53" show_column_type="y" show_relation="columns" >
 		<entity schema="public" name="members" color="BED3F4" x="48" y="176" />
