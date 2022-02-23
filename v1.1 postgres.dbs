@@ -41,6 +41,9 @@
 			<index name="unq_branch_address" unique="UNIQUE" >
 				<column name="address" />
 			</index>
+			<fk name="fk_branch_merchant" to_schema="public" to_table="merchant" >
+				<fk_column name="merchant_id" pk="merchant_id" />
+			</fk>
 		</table>
 		<table name="business_hours" >
 			<column name="id" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
@@ -157,16 +160,31 @@
 	</schema>
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.14.jar" driver_desc="Standard" host="104.248.77.226" port="5432" instance="hungrme" user="admin_db" passwd="aHVuZ3JtZWRiMjAyMg==" />
 	<layout name="Default Layout" id="Layout_1172" show_relation="columns" >
-		<entity schema="public" name="address_list" color="C1D8EE" x="352" y="560" />
-		<entity schema="public" name="branch" color="C1D8EE" x="672" y="496" />
-		<entity schema="public" name="business_hours" color="3986C1" x="1216" y="528" />
-		<entity schema="public" name="members" color="BED3F4" x="96" y="96" />
-		<entity schema="public" name="merchant" color="BED3F4" x="304" y="96" />
-		<entity schema="public" name="permission" color="C7F4BE" x="800" y="96" />
-		<entity schema="public" name="role" color="C7F4BE" x="592" y="288" />
-		<entity schema="public" name="role_permission" color="C7F4BE" x="592" y="96" />
-		<entity schema="public" name="user_branch_review" color="C1D8EE" x="48" y="48" />
-		<entity schema="public" name="users" color="BED3F4" x="304" y="352" />
+		<entity schema="public" name="address_list" color="BED3F4" x="64" y="768" />
+		<entity schema="public" name="branch" color="BED3F4" x="512" y="608" />
+		<entity schema="public" name="business_hours" color="BED3F4" x="64" y="608" />
+		<entity schema="public" name="members" color="C7F4BE" x="304" y="336" />
+		<entity schema="public" name="merchant" color="C7F4BE" x="512" y="336" />
+		<entity schema="public" name="permission" color="F4DDBE" x="544" y="96" />
+		<entity schema="public" name="role" color="F4DDBE" x="64" y="80" />
+		<entity schema="public" name="role_permission" color="F4DDBE" x="304" y="80" />
+		<entity schema="public" name="user_branch_review" color="C1D8EE" x="880" y="672" />
+		<entity schema="public" name="users" color="C7F4BE" x="48" y="336" />
+		<group name="branch" color="ECF0F7" >
+			<entity schema="public" name="branch" />
+			<entity schema="public" name="address_list" />
+			<entity schema="public" name="business_hours" />
+		</group>
+		<group name="members" color="EEF7EC" >
+			<entity schema="public" name="members" />
+			<entity schema="public" name="merchant" />
+			<entity schema="public" name="users" />
+		</group>
+		<group name="role_permission" color="F7F2EC" >
+			<entity schema="public" name="role_permission" />
+			<entity schema="public" name="permission" />
+			<entity schema="public" name="role" />
+		</group>
 		<script name="SQL_Editor" id="Editor_db4" language="SQL" >
 			<string><![CDATA[CREATE TABLE "business_hours" (
      "id" integer NOT NULL PRIMARY KEY,
